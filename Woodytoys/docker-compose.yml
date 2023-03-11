@@ -1,0 +1,101 @@
+version: "3" 
+
+services:
+  intranet_soa:
+    build:
+      context: ./Intranet/Intranet_SOA 
+      dockerfile: Dockerfile
+    networks:
+      local_network:
+        ipv4_address: 192.168.0.2
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./SOA Interne/conf/named.conf:/etc/bind/named.conf
+      - ./SOA Interne/conf/named.conf.options:/etc/bind/named.conf.options
+      - ./SOA Interne/conf/named.conf.local:/etc/bind/named.conf.local
+      - ./SOA Interne/zones/db.intra:/etc/bind/zones/db.intra
+    container_name: intranet_SOA 
+    
+    
+  resolver:
+    build:
+      context: ./Intranet/Resolver
+      dockerfile: Dockerfile
+    networks:
+      local_network:
+        ipv4_address: 192.168.0.5
+    volumes:
+      - ./SOA Interne/conf/named.conf:/etc/bind/named.conf
+      - ./SOA Interne/conf/named.conf.options:/etc/bind/named.conf.options
+      - ./SOA Interne/conf/named.conf.local:/etc/bind/named.conf.local
+    container_name: resolver
+    
+    
+  fileserver:
+    build:
+      context: ./Intranet/FileServer
+      dockerfile: Dockerfile
+    networks:
+      local_network:
+        ipv4_address: 192.168.0.4
+    ports:
+      - "139:139"
+      - "445:445"
+    container_name: samba
+
+  direction:
+    build:
+      context: ./Intranet/Users/direction
+      dockerfile: Dockerfile
+    networks:
+      direction_network:
+        ipv4_address: 192.168.1.2
+    container_name: direction
+    
+    
+  commerciaux:
+    build:
+      context: ./Intranet/Users/commerciaux
+      dockerfile: Dockerfile
+    networks:
+      commerciaux_network:
+        ipv4_address: 192.168.1.34
+    container_name: commerciaux
+    
+    
+  secretariat:
+    build:
+      context: ./Intranet/Users/secretariat
+      dockerfile: Dockerfile
+    networks:
+      secretaire_network:
+        ipv4_address: 192.168.1.98
+    container_name: secretaire
+
+networks:
+  local_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/16
+          gateway: 192.168.0.1
+  direction_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/27
+          gateway: 192.168.1.1
+  commerciaux_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.32/27
+          gateway: 192.168.1.33
+  secretaire_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.96/27
+          gateway: 192.168.1.97

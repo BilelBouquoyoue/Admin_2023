@@ -1,0 +1,17 @@
+$ORIGIN woodytoys.lab
+$TTL    604800
+@       IN      SOA     ns.woodytoys.lab. admin.woodytoys.lab. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache 
+;
+
+; Name servers
+woodytoys.lab.       IN      NS      ns.woodytoys.lab.
+
+; A records for name servers
+ns           IN      A       192.168.0.2
+resolveur    IN      A       192.168.0.3
+samba        IN      A       192.168.0.4

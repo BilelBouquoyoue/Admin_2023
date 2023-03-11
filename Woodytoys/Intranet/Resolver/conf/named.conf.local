@@ -1,0 +1,26 @@
+
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+
+zone "woodytoys.lab" {
+    type forward;
+    forwarders {51.68.190.133;};
+    forward only;
+};
+
+zone "b2b.woodytoys.lab"
+    type forward;
+    forwarders {135.125.239.191;};
+    forward only;
+};
+
+zone "woodytoys.lab"
+    type forward;
+    forwarders {135.125.239.192;};
+    forward only;
+};
