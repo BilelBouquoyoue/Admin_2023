@@ -1,0 +1,160 @@
+version: "3.8"
+
+
+networks:
+  # réseau bridge
+  bridge_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: bridge0
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.1.0/24 # dmz
+
+  # réseau ipvlan
+  ipvlan_net:
+    driver: ipvlan
+    driver_opts:
+      ipvlan_mode: l3
+      parent: bridge0
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.2.0/24 # trusted zone
+        - subnet: 10.10.3.0/24 # database
+        - subnet: 10.10.4.0/24 # direction
+        - subnet: 10.10.5.0/24 # commerciaux
+        - subnet: 10.10.6.0/24 # secrétariat
+        - subnet: 10.10.7.0/24 # employés
+
+
+services:
+  # dmz
+  soa_public:
+    build: ./dmz/soa/
+    dns:
+      - 127.0.0.1
+    networks:
+      bridge_net:
+        ipv4_address: 10.10.1.2
+    ports:
+      - "54:53/udp"
+      - "54:53/tcp"
+    container_name: soa_public
+
+  web_public:
+    build: ./dmz/web/
+    dns:
+      - 10.10.1.2
+    networks:
+      bridge_net:
+        ipv4_address: 10.10.1.3
+    ports:
+      - "80:80/tcp"
+    container_name: web_public
+
+  # trusted zone
+  soa_interne:
+    build: ./trusted_zone/soa/
+    dns:
+      - 127.0.0.1
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.2.2
+    container_name: soa_interne
+
+  web_interne:
+    build: ./trusted_zone/web/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.2.3
+    ports:
+      - "80:80/tcp"
+    container_name: web_interne
+
+  mail_interne:
+    hostname: mail.woodytoys.lab
+    build: ./trusted_zone/mail/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.2.4
+    ports:
+      - "25:25/tcp"
+      - "143:143/tcp"
+    container_name: mail_interne
+
+  resolver:
+    build: ./trusted_zone/resolver/
+    dns:
+      - 127.0.0.1
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.2.5
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    container_name: resolver
+
+  # database
+  db:
+    build: ./database/
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.3.2
+    ports:
+      - "3306:3306/tcp"
+    container_name: database
+
+  # direction
+  directeur:
+    build: ./direction/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.4.2
+    container_name: directeur
+
+  # commerciaux
+  commerciaux:
+    build: ./commerciaux/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.5.2
+    container_name: commerciaux
+
+  # secrétariat
+  secretaire:
+    build: ./secretariat/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.6.2
+    container_name: secretaire
+
+  # employés
+  user1:
+    build: ./users/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.7.2
+    container_name: yves_delvigne
+
+  user2:
+    build: ./users/
+    dns:
+      - 10.10.2.5
+    networks:
+      ipvlan_net:
+        ipv4_address: 10.10.7.3
+    container_name: claude_masson

@@ -1,0 +1,15 @@
+$ORIGIN 1.10.10.in-addr.arpa.
+$TTL 86400
+@     IN     SOA    ns.m1-5.ephec-ti.be.     hostmaster.m1-5.ephec-ti.be. (
+                    2001062501 ; serial
+                    21600      ; refresh after 6 hours
+                    3600       ; retry after 1 hour
+                    604800     ; expire after 1 week
+                    86400 )    ; minimum TTL of 1 day
+
+      IN     NS     ns.m1-5.ephec-ti.be.
+
+2     IN     PTR    ns.m1-5.ephec-ti.be.
+3     IN     PTR    web.m1-5.ephec-ti.be.
+4     IN     PTR    mail.m1-5.ephec-ti.be.
+
