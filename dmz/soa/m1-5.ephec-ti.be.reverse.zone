@@ -10,6 +10,7 @@ $TTL 86400
       IN     NS     ns.m1-5.ephec-ti.be.
 
 2     IN     PTR    ns.m1-5.ephec-ti.be.
-3     IN     PTR    web.m1-5.ephec-ti.be.
+3     IN     PTR    www.m1-5.ephec-ti.be.
+3     IN     PTR    b2b.m1-5.ephec-ti.be.
 4     IN     PTR    mail.m1-5.ephec-ti.be.
 

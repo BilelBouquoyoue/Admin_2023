@@ -11,6 +11,7 @@ networks:
       driver: default
       config:
         - subnet: 10.10.1.0/24 # dmz
+          gateway: 10.10.1.1
 
   # réseau ipvlan
   ipvlan_net:
@@ -34,7 +35,7 @@ services:
   soa_public:
     build: ./dmz/soa/
     dns:
-      - 127.0.0.1
+      - 10.10.2.5
     networks:
       bridge_net:
         ipv4_address: 10.10.1.2
@@ -46,7 +47,7 @@ services:
   web_public:
     build: ./dmz/web/
     dns:
-      - 10.10.1.2
+      - 10.10.2.5
     networks:
       bridge_net:
         ipv4_address: 10.10.1.3
@@ -58,7 +59,7 @@ services:
   soa_interne:
     build: ./trusted_zone/soa/
     dns:
-      - 127.0.0.1
+      - 10.10.2.5
     networks:
       ipvlan_net:
         ipv4_address: 10.10.2.2

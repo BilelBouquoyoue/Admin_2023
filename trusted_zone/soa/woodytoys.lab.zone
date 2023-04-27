@@ -14,5 +14,4 @@ $TTL 86400
 ns           IN     A       10.10.2.2
 www          IN     A       10.10.2.3
 mail         IN     A       10.10.2.4
-resolv       IN     A       10.10.2.5
 
