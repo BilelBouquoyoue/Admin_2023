@@ -11,8 +11,8 @@ $TTL 86400
 
       IN     MX     10      mail.m1-5.ephec-ti.be.
 
-ns           IN     A       10.10.1.2
-www          IN     A       10.10.1.3
-b2b	     IN	    A	    10.10.1.3
-mail         IN     A       10.10.1.4
+ns           IN     A       45.76.43.233
+www          IN     A       45.76.43.233
+b2b	     IN	    A	    45.76.43.233
+mail         IN     A       45.76.43.233
 

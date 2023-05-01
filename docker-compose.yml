@@ -34,20 +34,16 @@ services:
   # dmz
   soa_public:
     build: ./dmz/soa/
-    dns:
-      - 10.10.2.5
     networks:
       bridge_net:
         ipv4_address: 10.10.1.2
     ports:
-      - "54:53/udp"
-      - "54:53/tcp"
+      - "53:53/udp"
+      - "53:53/tcp"
     container_name: soa_public
 
   web_public:
     build: ./dmz/web/
-    dns:
-      - 10.10.2.5
     networks:
       bridge_net:
         ipv4_address: 10.10.1.3
