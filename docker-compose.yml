@@ -51,6 +51,22 @@ services:
       - "80:80/tcp"
     container_name: web_public
 
+
+  mail_public:
+    build:
+      context: ./dmz/mail
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    ports:
+      - "45.76.43.233:25:25/tcp"
+      - "45.76.43.233:587:587/tcp"
+      - "45.76.43.233:110:110/tcp"
+      - "45.76.43.233:143:143/tcp"
+    container_name: mail_public
+
   # trusted zone
   soa_interne:
     build: ./trusted_zone/soa/

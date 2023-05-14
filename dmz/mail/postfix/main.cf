@@ -1,0 +1,30 @@
+# Define server identity
+myhostname = mail.m1-5.ephec-ti.be
+mydomain = m1-5.ephec-ti.be
+
+# Outgoing mail must use this as source address domain
+myorigin = $mydomain
+# Accepting local mail delivery for those destinations
+mydestination = $myhostname localhost.$mydomain localhost $mydomain
+
+# Définit les méthodes de cryptographie à utiliser (HIGH)
+tls_high_cipherlist = HIGH:!aNULL:!MD5:!ADH:!RC4:!DH 
+
+#smtpd_tls_received_header = yes
+smtpd_banner = $myhostname ESMTP $mail_name
+
+recipient_delimiter = +
+# virtual_alias_domains = $mydomain
+# virtual_alias_maps = hash:/etc/postfix/virtual
+
+# Network from which we accept smtp connexions
+mynetworks = 45.76.43.233 127.0.0.0/8 [::1]/128
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+inet_interfaces = all
+
+#Log configuration
+maillog_file=/var/log/postfix.log
+
+content_filter = smtp-amavis:[127.0.0.1]:10024
+receive_override_options = no_address_mappings
