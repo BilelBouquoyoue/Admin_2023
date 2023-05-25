@@ -66,6 +66,7 @@ services:
       - "45.76.43.233:587:587/tcp"
       - "45.76.43.233:110:110/tcp"
       - "45.76.43.233:143:143/tcp"
+      - "45.76.43.233:465:465/tcp"
     container_name: mail_public
 
   # trusted zone

@@ -9,6 +9,9 @@ RUN apt install amavisd-new -y
 RUN apt install spamassassin -y
 RUN apt install clamav -y
 
+COPY private.key /etc/certificat/
+COPY /postfix/certificate.crt /etc/certificat/
+
 # Fichiers pour postfix
 COPY postfix/main.cf /etc/postfix/
 COPY postfix/master.cf /etc/postfix/
@@ -43,6 +46,7 @@ EXPOSE 25/tcp
 EXPOSE 110/tcp
 EXPOSE 143/tcp
 EXPOSE 587/tcp
+EXPOSE 465/tcp
 
 # Lancement des services
 CMD service postfix start && \

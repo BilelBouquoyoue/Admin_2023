@@ -23,6 +23,10 @@ smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, rej
 smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
 inet_interfaces = all
 
+smtpd_tls_cert_file = /etc/certificat/cerificate.crt
+smtpd_tls_key_file = /etc/certificat/private.key
+smtpd_use_tls=yes
+
 #Log configuration
 maillog_file=/var/log/postfix.log
 
