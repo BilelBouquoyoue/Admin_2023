@@ -14,13 +14,12 @@ COPY named.conf.options /etc/bind/named.conf.options
 COPY ./m1-5.ephec-ti.be.zone /etc/bind/
 COPY ./m1-5.ephec-ti.be.reverse.zone /etc/bind/
 
+# Ajout des clés DNSSEC
+COPY Km1-5.ephec-ti.be.+007+xxxxx.key /etc/bind/
+COPY Km1-5.ephec-ti.be.+007+xxxxx.private /etc/bind/
 
-# Dossier pour stocker les clés DNSSEC
-RUN mkdir /etc/bind/keys
-
-# Génération des clés de signature DNSSEC
-RUN dnssec-keygen -a RSASHA256 -b 2048 -n ZONE m1-5.ephec-ti.be
-RUN dnssec-keygen -a RSASHA256 -b 2048 -n ZONE -f KSK m1-5.ephec-ti.be
-
+# Définition des autorisations sur les clés
+RUN chown bind:bind /etc/bind/Km1-5.ephec-ti.be.+007+xxxxx.key
+RUN chmod 400 /etc/bind/Km1-5.ephec-ti.be.+007+xxxxx.private
 
 CMD [ "named", "-g" ]

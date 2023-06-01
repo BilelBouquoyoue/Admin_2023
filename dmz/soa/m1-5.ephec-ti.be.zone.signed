@@ -8,7 +8,8 @@ $TTL 86400
                     86400 )    ; minimum TTL of 1 day
 
       IN     NS     ns.m1-5.ephec-ti.be.
-      
+      IN     DS     xxxxx 7 1 xxxxxxxxxxxxxxxx  ; Clé DS DNSSEC
+
       IN     MX     10      mail.m1-5.ephec-ti.be.
 
 ns           IN     A       45.76.43.233
@@ -16,3 +17,5 @@ www          IN     A       45.76.43.233
 b2b	     IN	    A	    45.76.43.233
 mail         IN     A       45.76.43.233
 
+; Ajout des enregistrements DNSKEY
+m1-5.ephec-ti.be. IN DNSKEY 256 3 7 (xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
