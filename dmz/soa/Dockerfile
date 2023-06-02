@@ -11,7 +11,6 @@ RUN mkdir -p /var/log/named/
 
 COPY ./named.conf /etc/bind/
 COPY ./m1-5.ephec-ti.be.zone /etc/bind/
-COPY ./m1-5.ephec-ti.be.zone.signed /etc/bind/
 COPY ./m1-5.ephec-ti.be.reverse.zone /etc/bind/
 
 
