@@ -12,6 +12,7 @@ RUN mkdir -p /var/log/named/
 COPY ./named.conf /etc/bind/
 COPY named.conf.options /etc/bind/named.conf.options
 COPY ./m1-5.ephec-ti.be.zone /etc/bind/
+COPY ./m1-5.ephec-ti.be.zone.signed /etc/bind/
 COPY ./m1-5.ephec-ti.be.reverse.zone /etc/bind/
 
 # Ajout des étapes pour générer les clés DNSSEC
