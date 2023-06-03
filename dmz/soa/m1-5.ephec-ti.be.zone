@@ -16,3 +16,11 @@ www          IN     A       45.76.43.233
 b2b	         IN	    A	    45.76.43.233
 mail         IN     A       45.76.43.233
 
+IN DNSKEY 256 3 7 (AwEAAZCg+PVCkHOG47EV4zBHThkgY/7Fhgikn2aAPIDZgJyMqKJ50O8r
+                   6UxJ1RIOJwqE6qc09X4+nb/NpQX1G19aB3y5GPJVVcRKs4srD8lqHRis 
+				   DecQNQFAwDq9t0xQdHVIU97bPDcAgp7H9Qjrv8rePJZ4cX7oid20SJ7C 
+				   wH5/WE4aAb/dyvWCxqZpMLYQHj/Fdj0j+C2hBUELFQffsxWv/WAKEP7Y 
+				   B32vDTOabdmEhiE4CpcHfna7UCuHf9THNpHhND/qedTkrItsv42fC7qW 
+				   mAcxx8bsXO6sW15F3eXCIW4QgqIjNSXO6f7OPAa1aKTea/XRNL9f0AOA 
+				   Zw9SJRkdzZ0= )
+

@@ -14,3 +14,12 @@ $TTL 86400
 233   IN     PTR    b2b.m1-5.ephec-ti.be.
 233   IN     PTR    mail.m1-5.ephec-ti.be.
 
+
+ IN DNSKEY 256 3 7 (AwEAAZHueos7tKWSO7NM03UqmjeaVYEGSrQjO91qsVZqeyq32Y+4/4Ke 
+                 rDNjeK4FSS8XEBFmVhb+xheRfTslEb4vwABZtZMHKs2g5a0cBjXSO5IA 
+				 qTr4gXX3V2Thx9w78e4Tgc70OqSuyXj4Oz3UkOD//mZCoEQSDLP9HvXS 
+				 GY2gQQC9hEyFn9UpmQXfWqz82rG+5jwQOrTYs5SNJPsPolbWkVKJAuHZ 
+				 qX+TDTAKGLkKn/k72wliIreqR83ggb17ihGyrh7rwxhEjnb7ygh5e0ro 
+				 GrOqhKii7GU1d7B2nDmEwlB7moNhzp2NsUbczYuXUOhmczD9aI+5e//S 
+				 IQULHEGJ+lk= )
+
